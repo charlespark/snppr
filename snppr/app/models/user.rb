@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-has_secure_password
-has_many :urls
-has_many :personals
+  
+  has_many :urls
+  has_many :categories
+
+  has_secure_password
 
 end

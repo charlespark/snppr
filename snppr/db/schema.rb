@@ -11,32 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930004542) do
+ActiveRecord::Schema.define(version: 20141002234945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "images", force: true do |t|
+    t.string   "alt_text"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "personals", force: true do |t|
+    t.string   "title"
+    t.string   "alt_text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "urls", force: true do |t|
+    t.string   "title"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
+    t.string   "full_name"
+    t.string   "user_name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "webs", force: true do |t|
+    t.string   "meta_data"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
