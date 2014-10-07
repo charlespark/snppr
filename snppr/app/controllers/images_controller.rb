@@ -1,4 +1,4 @@
-class ImagesController < ApplicationController::Base
+class ImagesController < ApplicationController
 
 def index
 	end

@@ -1,4 +1,4 @@
-class WebsController < ApplicationController::Base
+class WebsController < ApplicationController
 
 def index
 	end

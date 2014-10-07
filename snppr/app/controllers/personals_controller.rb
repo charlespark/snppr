@@ -1,4 +1,4 @@
-class PersonalsController < ApplicationController::Base
+class PersonalsController < ApplicationController
 
 def index
 	end
