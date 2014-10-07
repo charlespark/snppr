@@ -1,0 +1,18 @@
+<h1><%= @url.title %></h1>
+
+<% @url.webs.each do |w| %>
+<h3><%= w.title %></h3>
+<%= image_tag("http://api.page2images.com/directlink?p2i_url=" + w.link + "&p2i_key=204c87954d6e8029&p2i_device=6&p2i_size=300x180") %>
+<p><%= w.meta_data %></h3>
+<% end %>
+<br>
+<% @url.images.each do |i| %>
+<%= image_tag(i.link) %>
+<p><%= i.alt_text %></p>
+<% end %>
+<br>
+<% @url.personals.each do |p| %>
+<%= image_tag(p.image(:thumb)) %>
+<p><%= p.title %></p>
+<p><%= p.alt_text %></p>
+<% end %>

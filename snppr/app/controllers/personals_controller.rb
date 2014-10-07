@@ -1,24 +1,24 @@
-class PersonalsController < ApplicationController::Base
+class PersonalsController < ApplicationController
 
-def index
+  def index
 	end
 
-def new
+  def new
 	end
 
-def create
+  def create
+  end
+
+  def show
 	end
 
-def show
+  def edit
 	end
 
-def edit
+  def update
 	end
 
-def update
-	end
-
-def destroy
+  def destroy
 	end
 
 end
