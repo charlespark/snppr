@@ -1,4 +1,4 @@
-class UsersController < ApplicationController::Base
+class UsersController < ApplicationController
 
 	def index
 	end
@@ -8,7 +8,14 @@ class UsersController < ApplicationController::Base
 	end
 
 	def create
-	end
+    @user = User.new(params.require(:user).permit(:name, :email, :email_confirmation, :password, :password_confirmation))
+     if @user.save
+          # Handle a successful save.
+          redirect_to login_path
+     else
+          render 'new'
+     end
+  end
 
 	def show
 	end
