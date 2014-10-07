@@ -1,0 +1,29 @@
+
+<h1><%= @url.title %></h1>
+
+<div class="row">
+<% @url.webs.each do |w| %>
+  <div class="col-md-4">
+    <h3><%= w.title %></h3>
+     <%= link_to(w.link, target: '_blank') do %>
+        <%= image_tag("http://api.page2images.com/directlink?p2i_url=" + w.link + "&p2i_key=204c87954d6e8029&p2i_device=6&p2i_size=300x180") %>
+    <% end %>
+    <p><%= w.meta_data %></h3>
+  </div>
+<% end %>
+</div>
+<br>
+<div class="row">
+<% @url.images.each do |i| %>
+  <div class="col-md-4">
+    <%= image_tag(i.link, width: '300px', height: '185px') %>
+    <p><%= i.alt_text %></p>
+  </div>
+<% end %>
+</div>
+<br>
+<% @url.personals.each do |p| %>
+<%= image_tag(p.image(:thumb)) %>
+<p><%= p.title %></p>
+<p><%= p.alt_text %></p>
+<% end %>

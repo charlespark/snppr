@@ -1,0 +1,22 @@
+<%= form_for @url do |u| %>
+  <%= u.label :title %>
+  <%= u.text_field :title %>
+  <br>
+  <%= u.fields_for :images do |i| %>
+    IMAGE URL: <%= i.text_field :link %>
+  <% end %>  
+  <br>
+  <%= u.fields_for :webs do |w| %>
+    WEB URL: <%= w.text_field :link %>
+  <% end %>
+  <br>
+  <%= u.fields_for :personals, :html => {:multipart => true} do |p| %>
+    <%= p.file_field :image %>
+    <br>
+    TITLE: <%= p.text_field :title %>
+    <br>
+    ALT_TEXT: <%= p.text_field :alt_text %>
+  <% end %>
+  <br>
+  <%= u.submit %>
+<% end %> 

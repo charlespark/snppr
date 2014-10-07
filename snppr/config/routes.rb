@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  
+  #get "ENV['BASE_URL']/:slug", to: 'urls#show', as: 'url'
+  resources :urls, only:[:index, :new, :show, :create, :edit, :update]
+  
+  namespace "api", defaults: { format: 'json' } do
+    resources :urls
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
