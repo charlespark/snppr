@@ -17,3 +17,12 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+#dropbox {
+    border: solid 5px blue;
+    width: 400px;
+    height: 200px;   
+    margin-left: auto;
+	margin-right: auto;
+}
