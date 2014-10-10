@@ -27,6 +27,7 @@ class Api::UrlsController < ApplicationController
         w.save
       end
     end
+    @url_list = @url.images.to_a + @url.webs.to_a + @url.personals.to_a
     
     respond_to do |format|
       format.json { 
@@ -34,7 +35,8 @@ class Api::UrlsController < ApplicationController
           :url => @url,
           :images => @url.images,
           :webpages => @url.webs,
-          :personal_photos => @url.personals
+          :personal_photos => @url.personals,
+          :url_list => @url_list
       }}
     end
 	end

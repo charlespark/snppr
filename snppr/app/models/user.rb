@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
 <<<<<<< HEAD
   has_secure_password
+<<<<<<< HEAD
 =======
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -21,6 +22,8 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+=======
+>>>>>>> controller_features
 
 >>>>>>> frontEnd
 end
