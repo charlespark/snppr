@@ -15,24 +15,30 @@
     DropZone => you could drop any image from any page here
 </div>
 <script language="javascript">
-    var imgList = new Array();
+  var imgList = new Array();
 
-     var dropbox = document.getElementById('dropbox');
-    dropbox.addEventListener('dragenter', noopHandler, false);
-    dropbox.addEventListener('dragexit', noopHandler, false);
-    dropbox.addEventListener('dragover', noopHandler, false);
-    dropbox.addEventListener('drop', drop, false);
+  var dropbox = document.getElementById('dropbox');
+      dropbox.addEventListener('dragenter', noopHandler, false);
+      dropbox.addEventListener('dragexit', noopHandler, false);
+      dropbox.addEventListener('dragover', noopHandler, false);
+      dropbox.addEventListener('drop', drop, false);
     
     function noopHandler(evt) {
         evt.stopPropagation();
         evt.preventDefault();
     }
     function drop(evt) {
+        if(evt.dataTransfer){
         evt.stopPropagation();
         evt.preventDefault(); 
-        imgList.push(evt.dataTransfer.getData('Text'));
+        imgList.push(evt.dataTransfer.getData('URL'));
         addOption_list(imgList);
-        alert("Thiis ----"+ imgList[0] + " -- " + imgList.length);
+        alert(imgList[0]);
+        }
+        else {
+          alert("None");
+        }
+        //alert("Thiis ----"+ imgList[0] + " -- " + imgList.length);
     }
 
    
@@ -57,49 +63,3 @@
         }
     }
 </script>
-<div class="container">
-     <div class="header">
-   
-     </div>
-
-
-<div><h1>Sign Up!</h1></div>
-<div>
-     <ul>
-     <% @user.errors.messages.each do |key,value| %>
-     <li><%= key %>: <%= value.join(", ") %>
-     <% end %>
-     </ul>
-</div>
-
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-         <%= form_for @user do |f| %>
-           <%= f.label :name %>
-           <%= f.text_field :name, class: 'form-control' %>
-           <%= f.label :email  %> <%= @user.errors.messages[:email].join(", ") %>
-           <%= f.text_field :email, class: 'form-control' %>
-           
-           <%= f.label :email_confirmation %> <%= @user.errors.messages[:email].join(", ") %>
-           <%= f.text_field :email_confirmation, class: 'form-control' %>
-
-           <%= f.label :password %>
-           <%= f.password_field :password, class: 'form-control' %>
-            
-           <%= f.label :password_confirmation  %><%= @user.errors.messages[:password].join(", ") %>
-           <%= f.password_field :password_confirmation, class: 'form-control' %><br>
-           
-        
-           <%= f.submit "Sign Me Up!", class: "btn btn-primary" %>
-         <% end %>
-    </div> <!-- End of form -->
-  </div><!-- End of Row -->
-
-<div class="footer"></div>
-
-</div>
-
-
-
-
-</div>

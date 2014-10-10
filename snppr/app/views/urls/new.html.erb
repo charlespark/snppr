@@ -1,22 +1,193 @@
-<%= form_for @url do |u| %>
-  <%= u.label :title %>
-  <%= u.text_field :title %>
+<script language="javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+    
+    // document.onload = startup();
+    
+    // function startup() {
+    //   showNextWeb();  
+    //   showNextPersonal();
+    // }
+     
+    var imgList;
+    var dropbox = document.getElementById('dropbox');
+    dropbox.addEventListener('dragenter', noopHandler, false);
+    dropbox.addEventListener('dragexit', noopHandler, false);
+    dropbox.addEventListener('dragover', noopHandler, false);
+    dropbox.addEventListener('drop', drop, false);
+     
+    // var moreWebs = document.querySelector('.web-btn');
+    // moreWebs.addEventListener('click', removeBtn, false);
+ 
+    function noopHandler(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+    }
+    
+    // function showNextWeb(){
+    //   document.querySelector('.none.web').className = "web";
+    //   moreWebs = document.querySelector('.web-btn');
+    //   moreWebs.addEventListener('click', removeBtn, false);
+    // }
+    
+    // function showNextPersonal(){
+    //   document.querySelector('.none.personal').className = "show personal";
+    //   var morePersonals = document.querySelectorAll('.files');
+    //   for (var i = 0; i < morePersonals.length; i++){
+    //     morePersonals[i].addEventListener('change', showNextPersonal, false); 
+    //   }
+    // }
+    
+        
+    // function removeBtn(){
+    //   document.querySelector('.web-btn').className = "none";
+    //   showNextWeb();
+    // }
+
+    function drop(evt) {
+        var obj = evt.dataTransfer;
+        if(obj){
+          var obj = evt.dataTransfer;
+          evt.stopPropagation();
+          evt.preventDefault(); 
+          if(obj.getData){
+            imgList = obj.getData('URL');
+            if (checkURL(imgList)){
+                addImage(imgList); 
+            }
+            else {
+                addWeb(imgList);
+            }
+            
+          }
+          else{
+            alert("File Type not accepted in this dropbox");
+          }
+        }
+        else{
+          alert("There was an error with this submission");
+        }
+    }
+
+   
+    function addImage(link){
+        document.querySelector('.none.image input.empty').value = link; 
+        document.querySelector('.none.image input.empty').className = "filled";  
+        var node = document.createElement('li');
+        node.innerHTML = link;
+        document.querySelector('#list-preview').appendChild(node);
+    }
+    
+    function addWeb(link){
+        document.querySelector('.none.web input').value = link;
+        document.querySelector('.none.web').className = "";
+    }
+
+    function checkURL(url) {
+        return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    }
+    
+    // function addFile(list){
+    //   var reader = new FileReader();
+    //   var file = list[0];
+    //   alert(file);
+    //   reader.readAsDataURL(file); 
+    //   alert(list.length);
+    //   reader.onload = function(){  
+    //     document.querySelector('.none.personal input').value = reader.result;
+    //   }
+    //   for (var i = 0; i < list.length; i++) {
+    //     var file = list[i];
+        
+    //     if ('name' in file) {
+    //       var fileName = file.name;
+    //     }
+    //     else {
+    //       var fileName = file.fileName;
+    //     }
+        
+    //     if ('size' in file) {
+    //       var fileSize = file.size;
+    //     }
+    //     else {
+    //       var fileSize = file.fileSize;
+    //     }
+        
+    //     alert(fileName);
+    //     var image = fileName + ", size: " + fileSize + " bytes\n";
+    //     document.querySelector('.none.personal').className = "show";
+    //     document.querySelector('.none.personal input').value = reader.result;
+        
+    //     }
+      
+    // }
+    
+    //$('#loading-btn').click(function () {
+    //  var btn = $(this)
+    //  btn.button('loading')
+    //  $.ajax().always(function () {
+    //    btn.button('reset')
+    //  });
+   // });
+    
+    $('#addQueue').click(function(){
+        var input = $('textarea').val();
+        $('.none.web input.empty').first().val(input);
+        $('.none.web input.empty').first().attr('class', 'filled');
+        $('textarea').val("");
+        $('#list-preview').append("<li>" + input + "</li>");
+    });
+   // function addOption_list(imgList){
+        //alert(imgList.length);
+     //   for (var i=0; i < imgList.length;++i)
+       // {
+         //       addOption(document.drop_list.img_list, imgList[i], imgList[i]);
+                // if(i== dt_month){document.drop_list.img_list.options[i].selected=true;}
+       // }
+   // }
+  });
+</script>
+
+<%= form_for @url, :html => {:multipart => true} do |u| %>
+  <%= u.text_field :title, placeholder: "Shorten URL Title" %>
   <br>
   <%= u.fields_for :images do |i| %>
-    IMAGE URL: <%= i.text_field :link %>
+    <div class="none image">
+      <%= i.text_field :link, class: 'empty', placeholder: "IMAGE URL" %>
+    </div>
   <% end %>  
   <br>
   <%= u.fields_for :webs do |w| %>
-    WEB URL: <%= w.text_field :link %>
+    <div class="none web" id="webs">
+      <%= w.text_field :link, class: 'empty', placeholder: "WEB URL" %>
+    <br>
+    <input type="button" value="+" class="btn btn-primary btn-sm web-btn">
+    </div>
   <% end %>
   <br>
-  <%= u.fields_for :personals, :html => {:multipart => true} do |p| %>
-    <%= p.file_field :image %>
-    <br>
-    TITLE: <%= p.text_field :title %>
-    <br>
-    ALT_TEXT: <%= p.text_field :alt_text %>
+  <div class="personals">
+  <%= u.fields_for :personals do |p| %>
+    <div class="none personal">
+    <%= p.file_field :image, class: 'files' %>
+      <br>
+      <%= p.text_field :title, placeholder: 'TITLE' %>
+      <br>
+      <%= p.text_field :alt_text, placeholder: 'Alt Text' %>
+    </div>
   <% end %>
+  </div>
   <br>
-  <%= u.submit %>
+  <%= u.submit(class: 'btn btn-primary') %>
 <% end %> 
+<div class="container">
+<form>
+  <div id="dropbox">
+    <div id="top-preview">
+      <ol id="list-preview">
+      </ol>
+    </div>
+    <textarea rows="5"  placeholder="DropZone => you could drop any image from any page here or copy/paste and enter"></textarea>
+    <br>
+    <input class="btn btn-primary add-queue" id="addQueue" type="button" value="Add to Queue">
+  </div>
+</form>
+</div>

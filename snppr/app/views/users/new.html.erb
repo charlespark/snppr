@@ -1,0 +1,41 @@
+
+<div><h1>Sign Up!</h1></div>
+<div>
+     <ul>
+     <% @user.errors.messages.each do |key,value| %>
+     <li><%= key %>: <%= value.join(", ") %>
+     <% end %>
+     </ul>
+</div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <%= form_for @user do |f| %>
+           <%= f.label :name %>
+           <%= f.text_field :name, class: 'form-control' %>
+           <%= f.label :email  %> <%= @user.errors.messages[:email].join(", ") %>
+           <%= f.text_field :email, class: 'form-control' %>
+           
+           <%= f.label :email_confirmation %> <%= @user.errors.messages[:email].join(", ") %>
+           <%= f.text_field :email_confirmation, class: 'form-control' %>
+
+           <%= f.label :password %>
+           <%= f.password_field :password, class: 'form-control' %>
+            
+           <%= f.label :password_confirmation  %><%= @user.errors.messages[:password].join(", ") %>
+           <%= f.password_field :password_confirmation, class: 'form-control' %><br>
+           
+        
+           <%= f.submit "Sign Me Up!", class: "btn btn-primary" %>
+         <% end %>
+    </div> <!-- End of form -->
+  </div><!-- End of Row -->
+
+<div class="footer"></div>
+
+</div>
+
+
+
+
+</div>
