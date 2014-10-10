@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003181616) do
+ActiveRecord::Schema.define(version: 20141003154837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20141003181616) do
 
   create_table "images", force: true do |t|
     t.string   "alt_text"
-    t.string   "link"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "url_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20141003181616) do
 
   create_table "webs", force: true do |t|
     t.string   "meta_data"
-    t.string   "link"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "url_id"
