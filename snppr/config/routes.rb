@@ -1,5 +1,29 @@
 Rails.application.routes.draw do
-  
+  get 'sessions/create'
+
+  get 'sessions/show'
+
+  get 'sessions/index'
+
+  get 'sessions/destroy'
+
+  get 'sessions/update'
+
+  get 'sessions/new'
+
+  get 'sessions/edit'
+
+  get 'signup'  => 'users#new'
+
+  root             'static_pages#home'
+  get 'help'    => 'static_pages#help'
+  get 'about'   => 'static_pages#about'
+  get 'contact' => 'static_pages#contact'
+
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+
   #get "ENV['BASE_URL']/:slug", to: 'urls#show', as: 'url'
   resources :urls, only:[:index, :new, :show, :create, :edit, :update]
   resources :pages
