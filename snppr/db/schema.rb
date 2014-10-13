@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003154837) do
+ActiveRecord::Schema.define(version: 20141011050408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20141003154837) do
 
   create_table "images", force: true do |t|
     t.string   "alt_text"
-    t.string   "url"
+    t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "url_id"
@@ -56,11 +56,12 @@ ActiveRecord::Schema.define(version: 20141003154837) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email_confirmation"
   end
 
   create_table "webs", force: true do |t|
     t.string   "meta_data"
-    t.string   "url"
+    t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "url_id"
