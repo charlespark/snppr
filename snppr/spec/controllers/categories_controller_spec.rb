@@ -13,7 +13,7 @@ describe "POST create" do
 
 		describe "successful create" do
 
-			it "should create an id in the database" do
+			it "should create an entry in the database" do
 				expect {
 					'valid_attributes'
 				}.to change(Category,:count).by(1)

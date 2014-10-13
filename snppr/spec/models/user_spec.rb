@@ -4,7 +4,7 @@ require 'rails_helper'
 #User - refers to the actual SNPPR user
 
 # User
-# :name
+# :full_name
 # :email
 # :password_digest
 # :user_name

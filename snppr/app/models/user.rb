@@ -12,18 +12,18 @@ class User < ActiveRecord::Base
   has_many :urls
   has_many :categories
 
-<<<<<<< HEAD
-  has_secure_password
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
+#   has_secure_password
+# <<<<<<< HEAD
+# =======
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
-=======
->>>>>>> controller_features
+# =======
+# >>>>>>> controller_features
 
->>>>>>> frontEnd
+# >>>>>>> frontEnd
 end
