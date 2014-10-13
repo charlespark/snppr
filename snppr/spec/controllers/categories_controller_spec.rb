@@ -8,39 +8,41 @@ describe "POST create" do
 
 	context 'valid_attributes' do
 		before(:each) do
-			post :create, category: { title: 'Family' }
+			Test = User.create(user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555')
+			current_user = Test
+			post :create, category: { user_id: current_user.id, title: 'Family' }
 		end
+
+
 
 		describe "successful create" do
 
 			it "should create an entry in the database" do
-				expect {
-					'valid_attributes'
-				}.to change(Category,:count).by(1)
+				expect (Category.count).to eq(1)
 			end
 		end
-	end
-
-	context 'invalid_attributes' do
-		before(:each) do
-			post :create, category: { title: nil }
-		end
-
-		describe "unable to save" do
-
-			it "should not create an id in the database" do
-				expect {
-					'invalid_attributes'
-					}.to_not change(Category,:count).by(1)
-			end
-
-			it "should rerender the new template" do
-				'invalid_attributes'
-				expect(response).to render_template :new
-	      	end
-	    end
 	end
 end
+# 	context 'invalid_attributes' do
+# 		before(:each) do
+# 			post :create, category: { title: nil }
+# 		end
+
+# 		describe "unable to save" do
+
+# 			it "should not create an id in the database" do
+# 				expect {
+# 					'invalid_attributes'
+# 					}.to_not change(Category,:count).by(1)
+# 			end
+
+# 			it "should rerender the new template" do
+# 				'invalid_attributes'
+# 				expect(response).to render_template :new
+# 	      	end
+# 	    end
+# 	end
+# end
 end			
 			# it "should save the category to the database" do
 			# 	expect(assigns(:category)).to be_a_new(Category)
@@ -108,3 +110,10 @@ end
 # 		end
 # 	end
 # end
+
+
+
+# {
+# 					'valid_attributes'
+# 				}.to change(Category,:count).by(1)
+

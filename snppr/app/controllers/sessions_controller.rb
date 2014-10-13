@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
     end
   end
 
-
   def edit
   end
 
@@ -22,11 +21,13 @@ class SessionsController < ApplicationController
 
   def index
   end
- def destroy
+
+  def destroy
     log_out
     redirect_to root_url
   end
 
   def update
   end
+
 end
