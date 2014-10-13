@@ -1,12 +1,11 @@
 <script language="javascript">
     document.addEventListener("DOMContentLoaded", function(){
     
-    // document.onload = startup();
+    document.onload = startup();
     
-    // function startup() {
-    //   showNextWeb();  
-    //   showNextPersonal();
-    // }
+    function startup() {
+        showPersonal();
+     }
      
     var imgList;
     var dropbox = document.getElementById('dropbox');
@@ -37,12 +36,6 @@
     //   }
     // }
     
-        
-    // function removeBtn(){
-    //   document.querySelector('.web-btn').className = "none";
-    //   showNextWeb();
-    // }
-
     function drop(evt) {
         var obj = evt.dataTransfer;
         if(obj){
@@ -81,46 +74,15 @@
         document.querySelector('.none.web input').value = link;
         document.querySelector('.none.web').className = "";
     }
+    
+    function showPersonal(){
+        $('.none.personal').first().attr("class", "personal");
+    }
 
     function checkURL(url) {
         return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
     }
-    
-    // function addFile(list){
-    //   var reader = new FileReader();
-    //   var file = list[0];
-    //   alert(file);
-    //   reader.readAsDataURL(file); 
-    //   alert(list.length);
-    //   reader.onload = function(){  
-    //     document.querySelector('.none.personal input').value = reader.result;
-    //   }
-    //   for (var i = 0; i < list.length; i++) {
-    //     var file = list[i];
-        
-    //     if ('name' in file) {
-    //       var fileName = file.name;
-    //     }
-    //     else {
-    //       var fileName = file.fileName;
-    //     }
-        
-    //     if ('size' in file) {
-    //       var fileSize = file.size;
-    //     }
-    //     else {
-    //       var fileSize = file.fileSize;
-    //     }
-        
-    //     alert(fileName);
-    //     var image = fileName + ", size: " + fileSize + " bytes\n";
-    //     document.querySelector('.none.personal').className = "show";
-    //     document.querySelector('.none.personal input').value = reader.result;
-        
-    //     }
-      
-    // }
-    
+     
     //$('#loading-btn').click(function () {
     //  var btn = $(this)
     //  btn.button('loading')
@@ -130,7 +92,21 @@
    // });
     
     $('#addQueue').click(function(){
-        var input = $('textarea').val();
+        var textArea = $('textarea').val();
+        var personalInput = $('personal input').val();
+        var input;
+        if (textArea != "" && personalInput == ""){
+            input = textArea;
+        }
+        else if (personalInput != "" && textArea == ""){
+            input = personalInput;
+        }
+        else if (personalInput != "" && textArea != ""){
+            alert("You can only add one item to the Queue at per time");
+        }
+        else{
+            alert("You cannot add an empty item!");
+        }
         $('.none.web input.empty').first().val(input);
         $('.none.web input.empty').first().attr('class', 'filled');
         $('textarea').val("");
@@ -164,20 +140,6 @@
     </div>
   <% end %>
   <br>
-  <div class="personals">
-  <%= u.fields_for :personals do |p| %>
-    <div class="none personal">
-    <%= p.file_field :image, class: 'files' %>
-      <br>
-      <%= p.text_field :title, placeholder: 'TITLE' %>
-      <br>
-      <%= p.text_field :alt_text, placeholder: 'Alt Text' %>
-    </div>
-  <% end %>
-  </div>
-  <br>
-  <%= u.submit(class: 'btn btn-primary') %>
-<% end %> 
 <div class="container">
 <form>
   <div id="dropbox">
@@ -186,6 +148,20 @@
       </ol>
     </div>
     <textarea rows="5"  placeholder="DropZone => you could drop any image from any page here or copy/paste and enter"></textarea>
+  <div class="personals">
+  <%= u.fields_for :personals do |p| %>
+    <div class="none personal">
+      <%= p.text_field :title, placeholder: 'TITLE' %>
+      <br>
+      <%= p.text_field :alt_text, placeholder: 'Alt Text' %>
+      <br>
+      <%= p.file_field :image, class: 'files' %>
+    </div>
+  <% end %>
+  </div>
+  <br>
+  <%= u.submit(class: 'btn btn-primary') %>
+<% end %> 
     <br>
     <input class="btn btn-primary add-queue" id="addQueue" type="button" value="Add to Queue">
   </div>
