@@ -12,7 +12,6 @@
          <%= form_for @user do |f| %>
            <%= f.label :full_name %>
            <%= f.text_field :full_name, class: 'form-control' %>
-           
            <%= f.label :email  %> <%= @user.errors.messages[:email].join(", ") %>
            <%= f.text_field :email, class: 'form-control' %>
            

@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   has_many :urls
   has_many :categories
 
-
   has_secure_password
 
 
@@ -22,7 +21,4 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
-
-
-
 end
