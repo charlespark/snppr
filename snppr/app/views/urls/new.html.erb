@@ -7,6 +7,7 @@
         showPersonal();
      }
      
+    var personals;
     var imgList;
     var dropbox = document.getElementById('dropbox');
     dropbox.addEventListener('dragenter', noopHandler, false);
@@ -48,7 +49,13 @@
                 addImage(imgList); 
             }
             else {
-                addWeb(imgList);
+              imgList = obj.files;
+              var formData = new FormData();
+              for (var i = 0; i < imgList.length; i++) {
+                  formData.append('file', imgList[i]);
+              }
+              $('#list-preview').append("<li>" + formData['file'] + "</li>");
+              $('.show.personal input.files').val() == formData;
             }
             
           }
@@ -60,8 +67,7 @@
           alert("There was an error with this submission");
         }
     }
-
-   
+    
     function addImage(link){
         document.querySelector('.none.image input.empty').value = link; 
         document.querySelector('.none.image input.empty').className = "filled";  
@@ -76,24 +82,41 @@
     }
     
     function showPersonal(){
-        $('.none.personal').first().attr("class", "personal");
+        $('.none.personal').first().attr("class", "show personal");
+    }
+
+    function hidePersonal(){
+        $('.show.personal').first().attr("class", "none personal");
     }
 
     function checkURL(url) {
         return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
     }
      
-    //$('#loading-btn').click(function () {
-    //  var btn = $(this)
-    //  btn.button('loading')
-    //  $.ajax().always(function () {
-    //    btn.button('reset')
-    //  });
-   // });
+    $('#loading-btn').click(function () {
+        var btn = $(this)
+        var title = $('#url_title').val();
+        var images = $('.image input.filled');
+        var webs = $('.web input.filled');
+        var personals = $('.show.personal input.files'); 
+        var params = {url:[]}
+        btn.button('loading')
+        dataString = params['url'].push({title: title, images_attributes: images, webs_attributes: webs, personal_attributes: personals});      
+        $.ajax({
+            type: "POST",
+            url: "api/urls/new",
+            beforeSend: function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")},
+            data: dataString,
+            dataType: 'html',
+            success: function(data, textStatus){
+                $('#loading-btn').html(url_path(data));
+            }
+        });
+    });
     
     $('#addQueue').click(function(){
         var textArea = $('textarea').val();
-        var personalInput = $('personal input').val();
+        var personalInput = $('.show.personal input.files').val();
         var input;
         if (textArea != "" && personalInput == ""){
             input = textArea;
@@ -102,15 +125,19 @@
             input = personalInput;
         }
         else if (personalInput != "" && textArea != ""){
-            alert("You can only add one item to the Queue at per time");
+            alert("You can only add one item to the Queue at a time");
+            return
         }
         else{
             alert("You cannot add an empty item!");
+            return
         }
         $('.none.web input.empty').first().val(input);
         $('.none.web input.empty').first().attr('class', 'filled');
         $('textarea').val("");
         $('#list-preview').append("<li>" + input + "</li>");
+        showPersonal(); 
+        hidePersonal(); 
     });
    // function addOption_list(imgList){
         //alert(imgList.length);
@@ -123,7 +150,7 @@
   });
 </script>
 
-<%= form_for @url, :html => {:multipart => true} do |u| %>
+<%= form_for @url, html: {multipart: true} do |u| %>
   <%= u.text_field :title, placeholder: "Shorten URL Title" %>
   <br>
   <%= u.fields_for :images do |i| %>
@@ -148,7 +175,7 @@
       </ol>
     </div>
     <textarea rows="5"  placeholder="DropZone => you could drop any image from any page here or copy/paste and enter"></textarea>
-  <div class="personals">
+  <div class="show personals">
   <%= u.fields_for :personals do |p| %>
     <div class="none personal">
       <%= p.text_field :title, placeholder: 'TITLE' %>
@@ -160,7 +187,7 @@
   <% end %>
   </div>
   <br>
-  <%= u.submit(class: 'btn btn-primary') %>
+  <%= u.submit(class: 'btn btn-primary', id: 'loading-btn') %>
 <% end %> 
     <br>
     <input class="btn btn-primary add-queue" id="addQueue" type="button" value="Add to Queue">

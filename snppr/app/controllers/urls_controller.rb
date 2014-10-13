@@ -16,7 +16,10 @@ class UrlsController < ApplicationController
    
     if @url.save
       @url.generate_slug
-      redirect_to url_path(@url.slug)
+      respond_to do |format|
+          format.html { render 'urls/new' }
+          format.js
+      end
     else
       render :new
     end
