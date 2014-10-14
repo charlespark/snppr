@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)    # Not the final implementation!
+    @default = @user.categories.build(title: "Untitled Links")
+    @default.save
     if @user.save
       # Handle a successful save.
       log_in(@user)
