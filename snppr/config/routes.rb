@@ -1,17 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/create'
-
-  get 'sessions/show'
-
-  get 'sessions/index'
-
-  get 'sessions/destroy'
-
-  get 'sessions/update'
-
-  get 'sessions/new'
-
-  get 'sessions/edit'
 
   get 'signup'  => 'users#new'
 
@@ -22,14 +9,15 @@ Rails.application.routes.draw do
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+  get    'logout'  => 'sessions#destroy'
 
   #get "ENV['BASE_URL']/:slug", to: 'urls#show', as: 'url'
-  resources :urls, only:[:index, :new, :show, :create, :edit, :update]
+  resources :urls, only:[:index, :new, :create, :show, :edit, :update]
   resources :pages
   resources :users
   resources :categories
-
+  
+  get '/urls/:slug', to: 'urls#show', as: :slug
   namespace "api", defaults: { format: 'json' } do
     resources :urls
   end

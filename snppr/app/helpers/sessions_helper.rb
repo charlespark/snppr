@@ -1,5 +1,13 @@
 module SessionsHelper
 
+# Checks to see if there is a current user logged in
+  def require_user
+    if !logged_in? 
+      flash[:danger] = "You must be logged in to do that!"
+      redirect_to login_path
+    end
+  end
+
 # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
@@ -12,7 +20,7 @@ module SessionsHelper
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
-    !current_user.nil?
+    !!current_user
   end
 
   def log_out

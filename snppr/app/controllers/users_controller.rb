@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_user, only:[:show]
+  
   def new
     @user = User.new
   end
@@ -7,8 +9,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
       # Handle a successful save.
-      log_in @user
-      flash[:success] = "Welcome to SNPPR!"
+      log_in(@user)
+      current_user
+      flash[:success] = "Welcome to the SNPPR!"
       redirect_to @user
     else
       render 'new'
@@ -35,7 +38,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    debugger
+    @url = Url.new
+    @category = @user.categories
+    @cat = Category.new
+    5.times {@url.images.build }
+    5.times {@url.webs.build }
+    5.times {@url.personals.build }
   end
 
   def edit

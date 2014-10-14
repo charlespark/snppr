@@ -1,11 +1,14 @@
 class Api::UrlsController < ApplicationController
   
   def create
-    @url = Url.new(params.require(:url).permit(:title, images_attributes:[:link, :id], webs_attributes:[:link, :id], personals_attributes:[:image_title, :image_alt_text]))
-     
-    if @url.save      
+    @url = Url.new(params.require(:url).permit!)
+    
+    if @url.save
       @url.generate_slug
-      redirect_to url_path(@url.slug)
+      respond_to do |format|
+          format.js { render 'static_pages/home'} 
+          format.html
+      end
     else
       render :new
     end

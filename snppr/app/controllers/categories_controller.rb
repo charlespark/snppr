@@ -8,11 +8,13 @@ class CategoriesController < ApplicationController
 	end
 
 	def create
-	   	@category = Category.create(category_params)
-	   	if @category.save
-	   		redirect_to user_path(current_user)
-	   		else
-	   			render :new
+	  @category = Category.create(category_params)
+    @category.user_id = current_user.id	  
+
+    if @category.save
+	    redirect_to user_path(current_user)
+	  else
+	   	render :new
 		end
 	end
 
