@@ -107,7 +107,6 @@
             url: "api/urls/new",
             beforeSend: function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")},
             data: dataString,
-            dataType: 'html',
             success: function(data, textStatus){
                 $('#loading-btn').html(url_path(data));
             }

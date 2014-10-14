@@ -33,19 +33,20 @@ body {
 }
 
 #dropbox {
-  height: 300px;
-  width: 400px;
+  height: 35vh;
+  width: 100%;
   border: 2px solid #a3a3a3;
   border-radius: 4px;
   #top-preview {
     height: 75%; 
-    border: 1px dotted #e3e3e3;
+    border: none;
     overflow: hidden;
   }
   textarea {
     height: 25%;
     width: 100%;
-    border: none;
+    border: 2px dotted #d3d3d3;
+    text-align:center;
   }
 }
 
@@ -53,10 +54,18 @@ body {
   vertical-align: bottom;
 }
 
+.show {
+  display: inline-block;
+}
+
 .none {
   display: none;
 }
 
-.show {
-  display: inline-block;
+.none-filled {
+  display: none;
+}
+
+.user-show-container {
+  max-width: 50%;
 }

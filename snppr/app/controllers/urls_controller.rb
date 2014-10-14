@@ -13,12 +13,18 @@ class UrlsController < ApplicationController
 
   def create
     @url = Url.new(params.require(:url).permit!)
+    @cat = Category.new
+    if logged_in?
+      @user = current_user
+      @category = @user.categories
+      @url.user = current_user
+    end
    
     if @url.save
       @url.generate_slug
       respond_to do |format|
-          format.html { render 'urls/new' }
-          format.js
+          format.js { render 'users/show', :category => @cat, :user => @user, :categories => @category }
+          format.html
       end
     else
       render :new

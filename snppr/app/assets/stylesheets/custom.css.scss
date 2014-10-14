@@ -1,9 +1,6 @@
 
-
-/* universal */
-
 html {
-  overflow-y: scroll;
+overflow-y: scroll;
 }
 
 body {
@@ -25,8 +22,6 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
-
-/* typography */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -53,8 +48,6 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
-
 #logo {
   float: left;
   margin-right: 10px;
@@ -70,9 +63,6 @@ p {
   color: #fff;
   text-decoration: none;
 }
-
-
-/* footer */
 
 footer {
   margin-top: 45px;
@@ -108,8 +98,6 @@ footer ul li {
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
-
-/* miscellaneous */
 
 .debug_dump {
   clear: both;
@@ -155,8 +143,6 @@ aside {
 }
 
 
-/* User forms */
-
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -182,3 +168,4 @@ input {
     color: red;
   }
 }
+
