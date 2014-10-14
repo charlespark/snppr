@@ -51,4 +51,14 @@ RSpec.describe SessionsController, :type => :controller do
     end
   end
 
+  describe "DELETE 'destroy'" do
+    it "should log the user out" do
+      @user = User.create(user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555')
+      delete :destroy, id: @user
+      expect(response).to redirect_to root_url
+      # controller.current_user.should be_nil
+      # controller.should_not be_signed_in
+    end 
+  end
+
 end

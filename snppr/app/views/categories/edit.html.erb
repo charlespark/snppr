@@ -1,0 +1,26 @@
+<h1>Categories#edit</h1>
+<p>Find me in app/views/categories/new.html.erb</p>
+
+<% provide(:title, "Edit category") %>
+<h1>Edit Category</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@category) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+
+      <p>
+      </p>
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+<!--     <div class="gravatar_edit">
+      <%= gravatar_for @user %>
+      <a href="http://gravatar.com/emails">change</a>
+    </div> -->
+  </div>
+</div>
