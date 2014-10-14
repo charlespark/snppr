@@ -149,49 +149,6 @@
 </script>
 
 <div class="container">
-  <div class="col-md-6 user-category">
-    <h2>
-      History
-      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-        Add Category
-      </button>
-    </h2>
-    
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Create Category</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_for @cat, url: { controller: 'categories', action: 'create' } do |c| %>
-          <%= c.text_field :title %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= c.submit "Create Category", class: 'btn btn-primary btn-modal btn-sm' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="history">
-      <% @user.categories.each do |cat| %>
-      <ul>
-        <li>
-           <h3><%= cat.title %></h3>
-            <% cat.urls.each do |url| %>
-            <ul>
-              <li><%= link_to("http://snppr.ly/#{url.slug}", slug_path(url.slug), method: 'get') %></li>
-            </ul>
-            <% end %>
-        </li>
-      </ul>
-      <% end %>
-    </div>
-  </div>
   <div class="col-md-6 user-show-container">
     <h2><%= @user.full_name %></h2>
     <h5><%= @user.email %></h5>
@@ -235,4 +192,47 @@
           </div>
       </div>
     </div>
+  <div class="col-md-6 user-category">
+    <h2>
+      History
+      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+        Add Category
+      </button>
+    </h2>
+    
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Category</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @cat, url: { controller: 'categories', action: 'create' } do |c| %>
+          <%= c.text_field :title %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= c.submit "Create Category", class: 'btn btn-primary btn-modal btn-sm' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="history">
+      <% @user.categories.each do |cat| %>
+      <ul>
+        <li>
+           <h3><%= cat.title %></h3>
+            <% cat.urls.each do |url| %>
+            <ul>
+              <li><%= link_to("http://snppr.ly/#{url.slug}", slug_path(url.slug), method: 'get') %></li>
+            </ul>
+            <% end %>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
 </div>
