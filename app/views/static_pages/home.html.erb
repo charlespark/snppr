@@ -139,14 +139,21 @@
             alert("You cannot add an empty item!");
             return
         }
-        $('.none.web input.empty').first().val(input);
-        $('.none.web input.empty').first().attr('class', 'filled');
-        $('textarea').val("");
-        $('#list-preview').append("<li>" + input + "</li>");
-        showPersonal(); 
-        hidePersonal();
-        var personalUpload = $('.show.personal .files');
-        personalUpload.on("change", showPersonalAttributes);
+        
+        if (checkURL(input)){
+            addImage(input);
+            $('textarea').val("");
+        }
+        else { 
+            $('.none.web input.empty').first().val(input);
+            $('.none.web input.empty').first().attr('class', 'filled');
+            $('textarea').val("");
+            $('#list-preview').append("<li>" + input + "</li>");
+            showPersonal(); 
+            hidePersonal();
+            var personalUpload = $('.show.personal .files');
+            personalUpload.on("change", showPersonalAttributes);
+        }
     });
   });
 </script>

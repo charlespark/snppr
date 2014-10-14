@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   def scrape_data(url)
     mechanize = Mechanize.new
     page = mechanize.get(url)
+    if page.filename
+      return nil
+    end
+    
     if page.at("head meta[name='description']") || page.at("head meta[name='Description']")
       if page.at("head meta[name='description']")
         meta = page.at("head meta[name='description']").attributes["content"].value
@@ -23,7 +27,10 @@ class ApplicationController < ActionController::Base
   def scrape_title(url)
     mechanize = Mechanize.new
     page = mechanize.get(url)
-    page.title
+    if page.filename
+      return nil
+    end
+    page.title 
   end
  
   #Using the mechanize gem, this image_scrape method takes the image URL, opens up bing image search, re-searches the image URL, grabs the first webpage that hosts the image, and grab the alt_text of the image.
