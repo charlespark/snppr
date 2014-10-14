@@ -149,7 +149,50 @@
 </script>
 
 <div class="container">
-  <div class="col-md-6 user-category">
+  <div class="col-md-6 user-split">
+    <h2><%= @user.full_name %></h2>
+    <h5><%= @user.email %></h5>
+      <div class="row form">
+        <%= form_for @url, html: { multipart: true, class: 'form-group dropbox-form' }, remote: true do |u| %>
+          <% if logged_in? %>
+            <%= u.text_field :title, placeholder: "Shorten URL Title" , class: 'form-control' %>
+            <%= u.collection_select :category_id, @category, :id, :title, {}, { class: 'form-control category-collect' } %>
+          <% end %>
+          <%= u.fields_for :images do |i| %>
+            <div class="none image">
+              <%= i.text_field :link, class: 'empty form-control', placeholder: "IMAGE URL" %>
+            </div>
+          <% end %>  
+          <%= u.fields_for :webs do |w| %>
+            <div class="none web" id="webs">
+              <%= w.text_field :link, class: 'empty form-control', placeholder: "WEB URL" %>
+            </div>
+          <% end %>
+          <div id="dropbox">
+            <div id="top-preview">
+              <ol id="list-preview">
+              </ol>
+              <div class="drop-background">
+                <span class="glyphicon glyphicon-picture"></span>
+                <h2>DRAG AND DROP HERE</h2>
+                <h6>(drag or upload desktop images below)</h6>
+              </div>
+            </div>
+            <textarea rows="5"  placeholder="USE THIS AREA TO COPY AND PASTE URL PAGES OR IMAGE URLS AND ADD TO QUEUE WITH BUTTON BELOW"></textarea>
+              <%= u.fields_for :personals do |p| %>
+              <div class="none personal">
+                <%= p.text_field :title, class: 'personal-title none', placeholder: 'Title of desktop uploaded image' %>
+                <%= p.text_field :alt_text, class: 'personal-alt none', placeholder: 'Alt Text of desktop uploaded image' %>
+                <%= p.file_field :image, class: 'files form-control' %>
+              </div>
+              <% end %>
+          <%= u.submit("CREATE URL", class: 'btn btn-success', id: 'loading-btn') %>
+        <% end %> 
+        <input class="btn btn-success add-queue" id="addQueue" type="button" value="ADD TO QUEUE">
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6 user-split">
     <h2>
       History
       <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
@@ -192,47 +235,4 @@
       <% end %>
     </div>
   </div>
-  <div class="col-md-6 user-show-container">
-    <h2><%= @user.full_name %></h2>
-    <h5><%= @user.email %></h5>
-      <div class="row form">
-        <%= form_for @url, html: { multipart: true, class: 'form-group dropbox-form' }, remote: true do |u| %>
-          <% if logged_in? %>
-            <%= u.text_field :title, placeholder: "Shorten URL Title" , class: 'form-control' %>
-            <%= u.collection_select :category_id, @category, :id, :title, {}, { class: 'form-control category-collect' } %>
-          <% end %>
-          <%= u.fields_for :images do |i| %>
-            <div class="none image">
-              <%= i.text_field :link, class: 'empty form-control', placeholder: "IMAGE URL" %>
-            </div>
-          <% end %>  
-          <%= u.fields_for :webs do |w| %>
-            <div class="none web" id="webs">
-              <%= w.text_field :link, class: 'empty form-control', placeholder: "WEB URL" %>
-            </div>
-          <% end %>
-          <div id="dropbox">
-            <div id="top-preview">
-              <ol id="list-preview">
-              </ol>
-              <div class="drop-background">
-                <span class="glyphicon glyphicon-picture"></span>
-                <h2>DRAG AND DROP HERE</h2>
-                <h6>(drag or upload desktop images below)</h6>
-              </div>
-            </div>
-            <textarea rows="5"  placeholder="USE THIS AREA TO COPY AND PASTE URL PAGES OR IMAGE URLS AND ADD TO QUEUE WITH BUTTON BELOW"></textarea>
-              <%= u.fields_for :personals do |p| %>
-              <div class="none personal">
-                <%= p.text_field :title, class: 'personal-title none', placeholder: 'Title of desktop uploaded image' %>
-                <%= p.text_field :alt_text, class: 'personal-alt none', placeholder: 'Alt Text of desktop uploaded image' %>
-                <%= p.file_field :image, class: 'files form-control' %>
-              </div>
-              <% end %>
-          <%= u.submit("CREATE URL", class: 'btn btn-success', id: 'loading-btn') %>
-        <% end %> 
-        <input class="btn btn-success add-queue" id="addQueue" type="button" value="ADD TO QUEUE">
-          </div>
-      </div>
-    </div>
 </div>
