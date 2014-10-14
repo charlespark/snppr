@@ -1,0 +1,65 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap.min
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+	margin: 0 auto;
+}
+
+.row.form {
+	width: 65%;
+}
+
+.row {
+	margin: 0 auto;
+}
+
+.dropbox-form {
+	width: 100%
+}
+
+.form-control {
+	margin: 0;
+}
+
+.glyphicon-picture {
+	font-size: 5em;
+	margin: 0;
+}
+
+h6 {
+  margin-top: -5px;
+}
+
+.drop-background {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.btn-modal {
+  width: 115px; 
+}
+
+.history h3, p, li{
+  text-align: left;
+}

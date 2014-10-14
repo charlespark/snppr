@@ -1,0 +1,78 @@
+<div class="container">
+  <button type="button" class="btn btn-default" id="single-btn">
+    <span class="glyphicon glyphicon-stop"></span>
+  </button>
+  <button type="button" class="btn btn-default active" id="double-btn">
+    <span class="glyphicon glyphicon-th-large"></span>
+  </button>
+  <button type="button" class="btn btn-default" id="grid-btn">
+    <span class="glyphicon glyphicon-th"></span>
+  </button>
+
+  <h1><%= @url.title %></h1>
+
+  <% @url_list.each do |obj| %>
+    <div class="container">
+    <div class="row none" id="single">
+    <% if obj.is_a?(Web) %>
+      <div class="col-md-12 images">
+         <%= link_to(obj.link, target: '_blank') do %>
+            <%= image_tag("http://api.page2images.com/directlink?p2i_url=" + obj.link + "&p2i_key=204c87954d6e8029&p2i_device=6&p2i_size=300x180", class: 'popoverOption', 'data-content'=>"Title: #{obj.title}, Meta: #{obj.meta_data}", rel:'popover', 'data-placement'=>'bottom') %>
+        <% end %>
+      </div>
+    <% elsif obj.is_a?(Image) %>
+      <div class="col-md-12 images">
+        <%= image_tag(obj.link, class: 'popoverOption', 'data-content'=>"#{obj.alt_text}", rel: 'popover', 'data-placement'=>'bottom') %>
+      </div>
+    <% else  %>
+      <div class="col-md-12 images">
+        <%= image_tag(obj.image(:thumb), class: 'popoverOption', 'data-content'=>"#{obj.title}, #{obj.alt_text}", rel: 'popover', 'data-placement'=>'bottom') %>
+      </div>
+    <% end %>
+    </div>
+    </div>
+  <% end %>
+
+  <% @url_list.each_slice(2).each do |arr| %>
+    <div class="row" id="double">
+      <% arr.each do |obj| %>
+        <% if obj.is_a?(Web) %>
+          <div class="col-md-6 images">
+             <%= link_to(obj.link, target: '_blank') do %>
+                <%= image_tag("http://api.page2images.com/directlink?p2i_url=" + obj.link + "&p2i_key=204c87954d6e8029&p2i_device=6&p2i_size=300x180", class: 'popoverOption', 'data-content'=>"Title: #{obj.title}, Meta: #{obj.meta_data}", rel:'popover', 'data-placement'=>'bottom') %>
+            <% end %>
+          </div>
+        <% elsif obj.is_a?(Image) %>
+          <div class="col-md-6 images">
+            <%= image_tag(obj.link, class: 'popoverOption', 'data-content'=>"#{obj.alt_text}", rel: 'popover', 'data-placement'=>'bottom') %>
+          </div>
+        <% else  %>
+          <div class="col-md-6 images">
+            <%= image_tag(obj.image(:thumb), class: 'popoverOption', 'data-content'=>"#{obj.title}, #{obj.alt_text}", rel: 'popover', 'data-placement'=>'bottom') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+<% @url_list.each_slice(4).each do |arr| %>
+    <div class="row none" id="grid">
+      <% arr.each do |obj| %>
+        <% if obj.is_a?(Web) %>
+          <div class="col-md-3 images">
+             <%= link_to(obj.link, target: '_blank') do %>
+                <%= image_tag("http://api.page2images.com/directlink?p2i_url=" + obj.link + "&p2i_key=204c87954d6e8029&p2i_device=6&p2i_size=300x180", class: 'popoverOption', 'data-content'=>"Title: #{obj.title}, Meta: #{obj.meta_data}", rel:'popover', 'data-placement'=>'bottom') %>
+            <% end %>
+          </div>
+        <% elsif obj.is_a?(Image) %>
+          <div class="col-md-3 images">
+            <%= image_tag(obj.link, class: 'popoverOption', 'data-content'=>"#{obj.alt_text}", rel: 'popover', 'data-placement'=>'bottom') %>
+          </div>
+        <% else  %>
+          <div class="col-md-3 images">
+            <%= image_tag(obj.image(:thumb), class: 'popoverOption', 'data-content'=>"#{obj.title}, #{obj.alt_text}", rel: 'popover', 'data-placement'=>'bottom') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
