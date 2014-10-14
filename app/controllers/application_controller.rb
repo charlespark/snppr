@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   
+  #Using the mechanize gem, this method scrapes the meta data off of a website, with the URL as the input.
   def scrape_data(url)
     mechanize = Mechanize.new
     page = mechanize.get(url)
@@ -18,12 +19,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  #Using the mechanize gem, this scrape_title method grabs the title of the webpage, with the URL as the input.
   def scrape_title(url)
     mechanize = Mechanize.new
     page = mechanize.get(url)
     page.title
   end
-  
+ 
+  #Using the mechanize gem, this image_scrape method takes the image URL, opens up bing image search, re-searches the image URL, grabs the first webpage that hosts the image, and grab the alt_text of the image.
   def image_scrape(url)
     @image_title = 0;
     mechanize = Mechanize.new
@@ -46,7 +49,7 @@ class ApplicationController < ActionController::Base
     
     if @image_title == nil || @image_title == 0 || @image_title.chars.count == 0
       @image_title = @image.filename
-    end 
+    end
     @image_title
   end
 end

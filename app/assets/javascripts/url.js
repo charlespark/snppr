@@ -1,3 +1,4 @@
+// jQuery functionality for Url show. Ability to switch between single, double, and grid view mode.
 $(document).ready(function(){
   $('.popoverOption').popover({ trigger: "hover" });
   

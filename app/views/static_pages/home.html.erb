@@ -5,9 +5,11 @@
     document.onload = startup();
     
     function startup() {
+        //All personal upload input fields are displayed none to start with. At startup I want to show the first one
         showPersonal();
      }
-     
+    
+    //Initialize the variables and set the dropbox to the dropzone and add even listeners to listen for drag and drop 
     var personals;
     var imgList;
     var personalUpload = $('.show.personal .files');
@@ -17,12 +19,14 @@
     dropbox.addEventListener('dragover', noopHandler, false);
     dropbox.addEventListener('drop', drop, false);
     personalUpload.on("change", showPersonalAttributes);
-     
+    
+    //noopHandler cancels the natural events of the event listeners we described above 
     function noopHandler(evt) {
         evt.stopPropagation();
         evt.preventDefault();
     }
-    
+   
+    //on drop of an object, the drop function gets called and passes the event. The event is then parsed for the dataTransfer and filters out the image URLs from the uploaded files. 
     function drop(evt) {
         var obj = evt.dataTransfer;
         if(obj){
@@ -50,7 +54,9 @@
           alert("There was an error with this submission");
         }
     }
-    
+   
+    //ALL input fields are hidden in the background and filled in when the object is dropped into the dropzone. The follwoing methods add the links to the input field and/or show the fields for desktop uploads or background image of the dropzone. 
+   
     function addImage(link){
         document.querySelector('.none.image input.empty').value = link; 
         document.querySelector('.none.image input.empty').className = "filled";  
@@ -83,10 +89,12 @@
         $('.drop-background').attr("class", "none drop-background");
     }
 
+    //This function checks to see if the URL is an image or a web URL
     function checkURL(url) {
         return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
     }
      
+    //This jQuery ajax call is triggered once the user once to create a url. It takes all the input values of the form and transfers the data as a hash to our api and responds back with the data.
     $('#loading-btn').click(function () {
         var btn = $(this)
         var title = $('#url_title').val();
@@ -110,7 +118,8 @@
 
         });
     });
-    
+  
+    //This method will add any URLs you copy and paste to our dropzone or files uploaded from your desktop. It also checks to see if you are trying to both or none at the same time and will alert you to only upload once at a time.  
     $('#addQueue').click(function(){
         hideBackground();
         var textArea = $('textarea').val();
