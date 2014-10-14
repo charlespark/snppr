@@ -20,3 +20,6 @@
 
 #Ignore env variables
 /config/local_env.yml
+
+#Ignore Env
+*.env

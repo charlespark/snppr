@@ -4,9 +4,13 @@ gem 'imgkit'
 gem 'mechanize'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pry'
-gem 'sidekiq'
 gem 'bootstrap-sass', '~>3.2.0'
-gem 'dropzonejs-rails'
+gem 'aws-sdk'
+
+group :production do
+  gem 'thin'
+  gem 'rails_12factor'
+end
   
 group :development do
   gem 'better_errors'
