@@ -4,48 +4,86 @@ RSpec.describe UsersController, :type => :controller do
 
 
 # below are tests for the controller_spec page
-	# describe "GET index" do
-	# 	it "should succeed" do
-	# 		expect(response).to be_success
-	# 	end
-	# end
-		# it "should render the index template" do
-		# 	expect(response).to render_template(:index)
-		# end
+	describe "GET index" do
+		it "should succeed" do
+			expect(response).to be_success
+		end
 
-		# it "should return a list of saved links" do
-		# 	get :index
-		# 	@links = assigns :links
-		# 	expect(@links).to match_array(Links.all)
-		# 	#find the term to call for personalized links
-		# end
+		it "should render the index template" do
+			expect(response).to render_template(:index)
+		end
+	end
+
+	describe "GET show" do
+		before(:each) do
+			@user = User.create(user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555')
+ 			get :show, id: User.create
+		end
+
+		it "should render a template" do
+			expect(response).to render_template(:show)
+		end
+
+		it "should return a User" do
+			@user = assigns(:user)
+			expect(@user).to be_a(User)
+		end
+	end
 
 	describe "POST create" do
-
-		# context 'valid_attributes' do
-		# 	before(:each) do
-		# 		post :create, user: { user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555' }
-		# 	end
-			# describe "successful create" do
-
-				it "should create a user in the database" do
-					expect {
-						post :create, user: { user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555' }
-					}.to change(User,:count).by(1)
+		context 'valid_attributes' do
+			before(:each) do
+				post :create, user: { user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555' }
+			end
+			
+			describe "successful create" do
+				it "should save the new user to the database" do
+					expect(assigns(:user)).to be_a_new(User)
 				end
-		# end
-	end		
+			end
+		end
+	end
+
+	# describe "PATCH update" do
+	# 	before(:each) do
+	# 		@user = User.create(user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555')
+ 	# 		patch :update, id: @user
+	# 	end
+
+	# 	it "located the requested @testrequest" do
+	# 	    patch :update, edit_id: @testrequest.edit_id, request: FactoryGirl.attributes_for(:request)
+	# 	    assigns(:request).should eq(@testrequest)
+	# 	end
+
+	# describe "using valid data" do
+
+	#     it "updates the request" do
+	#         patch :update, edit_id: @testrequest.edit_id, request: FactoryGirl.attributes_for(:request, name: "Larry Johnson")
+	#         @testrequest.reload
+	#         @testrequest.name.should eq("Larry Johnson")
+	#     end
+	# end
+	# end
 end
 
-# describe "GET show" do
 
-# # is this a model or a controller spec test case?
-# 		it "should be able to create and populate categories" do
-# 			expect(@default).to create_custom_categories
-# 		end
 
-# #IF NOT LOGGED IN
-# 		it "should be able to use functionality as a guest" do
-# 			expect to have input and output functionality as a guest
-# 		end
-# 	end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# it "should create a user in the database" do
+# 	expect {
+# 		post :create, user: { user_name: 'happy', full_name: 'Aaron Zyla', email: 'aazz@123.com', password_digest: 'az09AZ555555' }
+# 	}.to change(User,:count).by(1)

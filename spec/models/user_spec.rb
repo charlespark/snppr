@@ -3,16 +3,6 @@ require 'rails_helper'
 
 #User - refers to the actual SNPPR user
 
-# User
-# :full_name
-# :email
-# :password_digest
-# :user_name
-# has_many :links, :categories
-# Can the user login?
-# Can the user add images/links to the input page whether logged-in or not?
-
-
 describe User do
 	user = User.new
 
