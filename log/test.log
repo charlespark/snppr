@@ -1,0 +1,62 @@
+  [1m[36mActiveRecord::SchemaMigration Load (22.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (24.3ms)[0m  CREATE EXTENSION IF NOT EXISTS "plpgsql"
+  [1m[36m (20.8ms)[0m  [1mDROP TABLE "categories"[0m
+  [1m[35m (12.7ms)[0m  CREATE TABLE "categories" ("id" serial primary key, "title" character varying(255), "created_at" timestamp, "updated_at" timestamp, "user_id" integer) 
+  [1m[36m (4.4ms)[0m  [1mDROP TABLE "images"[0m
+  [1m[35m (6.2ms)[0m  CREATE TABLE "images" ("id" serial primary key, "alt_text" character varying(255), "link" character varying(255), "created_at" timestamp, "updated_at" timestamp, "url_id" integer) 
+  [1m[36m (1.8ms)[0m  [1mDROP TABLE "personals"[0m
+  [1m[35m (11.5ms)[0m  CREATE TABLE "personals" ("id" serial primary key, "title" character varying(255), "alt_text" character varying(255), "created_at" timestamp, "updated_at" timestamp, "image_file_name" character varying(255), "image_content_type" character varying(255), "image_file_size" integer, "image_updated_at" timestamp, "url_id" integer) 
+  [1m[36m (4.2ms)[0m  [1mDROP TABLE "urls"[0m
+  [1m[35m (5.2ms)[0m  CREATE TABLE "urls" ("id" serial primary key, "title" character varying(255), "slug" character varying(255), "created_at" timestamp, "updated_at" timestamp, "category_id" integer, "user_id" integer) 
+  [1m[36m (1.6ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (5.9ms)[0m  CREATE TABLE "users" ("id" serial primary key, "full_name" character varying(255), "user_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp, "email_confirmation" character varying(255)) 
+  [1m[36m (1.7ms)[0m  [1mDROP TABLE "webs"[0m
+  [1m[35m (12.7ms)[0m  CREATE TABLE "webs" ("id" serial primary key, "meta_data" character varying(255), "link" character varying(255), "created_at" timestamp, "updated_at" timestamp, "url_id" integer, "title" character varying(255)) 
+  [1m[36m (0.7ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RenameImageUrlColumn (20141014090715)
+  [1m[35m (12.0ms)[0m  BEGIN
+  [1m[36m (14.0ms)[0m  [1mALTER TABLE "images" ADD COLUMN "link" character varying(255)[0m
+PG::DuplicateColumn: ERROR:  column "link" of relation "images" already exists
+: ALTER TABLE "images" ADD COLUMN "link" character varying(255)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (1.4ms)[0m  CREATE EXTENSION IF NOT EXISTS "plpgsql"
+  [1m[36m (15.3ms)[0m  [1mDROP TABLE "categories"[0m
+  [1m[35m (16.8ms)[0m  CREATE TABLE "categories" ("id" serial primary key, "title" character varying(255), "created_at" timestamp, "updated_at" timestamp, "user_id" integer) 
+  [1m[36m (10.0ms)[0m  [1mDROP TABLE "images"[0m
+  [1m[35m (3.7ms)[0m  CREATE TABLE "images" ("id" serial primary key, "alt_text" character varying(255), "link" character varying(255), "created_at" timestamp, "updated_at" timestamp, "url_id" integer) 
+  [1m[36m (1.6ms)[0m  [1mDROP TABLE "personals"[0m
+  [1m[35m (26.1ms)[0m  CREATE TABLE "personals" ("id" serial primary key, "title" character varying(255), "alt_text" character varying(255), "created_at" timestamp, "updated_at" timestamp, "image_file_name" character varying(255), "image_content_type" character varying(255), "image_file_size" integer, "image_updated_at" timestamp, "url_id" integer) 
+  [1m[36m (8.9ms)[0m  [1mDROP TABLE "urls"[0m
+  [1m[35m (17.0ms)[0m  CREATE TABLE "urls" ("id" serial primary key, "title" character varying(255), "slug" character varying(255), "created_at" timestamp, "updated_at" timestamp, "category_id" integer, "user_id" integer) 
+  [1m[36m (1.9ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (5.5ms)[0m  CREATE TABLE "users" ("id" serial primary key, "full_name" character varying(255), "user_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp, "email_confirmation" character varying(255)) 
+  [1m[36m (1.7ms)[0m  [1mDROP TABLE "webs"[0m
+  [1m[35m (4.6ms)[0m  CREATE TABLE "webs" ("id" serial primary key, "meta_data" character varying(255), "link" character varying(255), "created_at" timestamp, "updated_at" timestamp, "url_id" integer, "title" character varying(255)) 
+  [1m[36m (0.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RenameImageUrlColumn (20141014090715)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (6.9ms)[0m  [1mALTER TABLE "images" ADD COLUMN "link" character varying(255)[0m
+PG::DuplicateColumn: ERROR:  column "link" of relation "images" already exists
+: ALTER TABLE "images" ADD COLUMN "link" character varying(255)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.4ms)[0m  CREATE EXTENSION IF NOT EXISTS "plpgsql"
+  [1m[36m (15.1ms)[0m  [1mDROP TABLE "categories"[0m
+  [1m[35m (4.7ms)[0m  CREATE TABLE "categories" ("id" serial primary key, "title" character varying(255), "created_at" timestamp, "updated_at" timestamp, "user_id" integer) 
+  [1m[36m (1.7ms)[0m  [1mDROP TABLE "images"[0m
+  [1m[35m (5.3ms)[0m  CREATE TABLE "images" ("id" serial primary key, "alt_text" character varying(255), "link" character varying(255), "created_at" timestamp, "updated_at" timestamp, "url_id" integer) 
+  [1m[36m (2.7ms)[0m  [1mDROP TABLE "personals"[0m
+  [1m[35m (9.3ms)[0m  CREATE TABLE "personals" ("id" serial primary key, "title" character varying(255), "alt_text" character varying(255), "created_at" timestamp, "updated_at" timestamp, "image_file_name" character varying(255), "image_content_type" character varying(255), "image_file_size" integer, "image_updated_at" timestamp, "url_id" integer) 
+  [1m[36m (3.5ms)[0m  [1mDROP TABLE "urls"[0m
+  [1m[35m (8.9ms)[0m  CREATE TABLE "urls" ("id" serial primary key, "title" character varying(255), "slug" character varying(255), "created_at" timestamp, "updated_at" timestamp, "category_id" integer, "user_id" integer) 
+  [1m[36m (1.8ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (4.4ms)[0m  CREATE TABLE "users" ("id" serial primary key, "full_name" character varying(255), "user_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp, "email_confirmation" character varying(255)) 
+  [1m[36m (2.4ms)[0m  [1mDROP TABLE "webs"[0m
+  [1m[35m (3.6ms)[0m  CREATE TABLE "webs" ("id" serial primary key, "meta_data" character varying(255), "link" character varying(255), "created_at" timestamp, "updated_at" timestamp, "url_id" integer, "title" character varying(255)) 
+  [1m[36m (0.5ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
