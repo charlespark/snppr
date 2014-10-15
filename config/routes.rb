@@ -23,62 +23,55 @@ Rails.application.routes.draw do
   end
 
 
-#           Prefix Verb   URI Pattern                    Controller#Action
-#  sessions_create GET    /sessions/create(.:format)     sessions#create
-#    sessions_show GET    /sessions/show(.:format)       sessions#show
-#   sessions_index GET    /sessions/index(.:format)      sessions#index
-# sessions_destroy GET    /sessions/destroy(.:format)    sessions#destroy
-#  sessions_update GET    /sessions/update(.:format)     sessions#update
-#     sessions_new GET    /sessions/new(.:format)        sessions#new
-#    sessions_edit GET    /sessions/edit(.:format)       sessions#edit
-#           signup GET    /signup(.:format)              users#new
-#             root GET    /                              static_pages#home
-#             help GET    /help(.:format)                static_pages#help
-#            about GET    /about(.:format)               static_pages#about
-#          contact GET    /contact(.:format)             static_pages#contact
-#            login GET    /login(.:format)               sessions#new
-#                  POST   /login(.:format)               sessions#create
-#           logout DELETE /logout(.:format)              sessions#destroy
-#             urls GET    /urls(.:format)                urls#index
-#                  POST   /urls(.:format)                urls#create
-#          new_url GET    /urls/new(.:format)            urls#new
-#         edit_url GET    /urls/:id/edit(.:format)       urls#edit
-#              url GET    /urls/:id(.:format)            urls#show
-#                  PATCH  /urls/:id(.:format)            urls#update
-#                  PUT    /urls/:id(.:format)            urls#update
-#            pages GET    /pages(.:format)               pages#index
-#                  POST   /pages(.:format)               pages#create
-#         new_page GET    /pages/new(.:format)           pages#new
-#        edit_page GET    /pages/:id/edit(.:format)      pages#edit
-#             page GET    /pages/:id(.:format)           pages#show
-#                  PATCH  /pages/:id(.:format)           pages#update
-#                  PUT    /pages/:id(.:format)           pages#update
-#                  DELETE /pages/:id(.:format)           pages#destroy
-#            users GET    /users(.:format)               users#index
-#                  POST   /users(.:format)               users#create
-#         new_user GET    /users/new(.:format)           users#new
-#        edit_user GET    /users/:id/edit(.:format)      users#edit
-#             user GET    /users/:id(.:format)           users#show
-#                  PATCH  /users/:id(.:format)           users#update
-#                  PUT    /users/:id(.:format)           users#update
-#                  DELETE /users/:id(.:format)           users#destroy
-#       categories GET    /categories(.:format)          categories#index
-#                  POST   /categories(.:format)          categories#create
-#     new_category GET    /categories/new(.:format)      categories#new
-#    edit_category GET    /categories/:id/edit(.:format) categories#edit
-#         category GET    /categories/:id(.:format)      categories#show
-#                  PATCH  /categories/:id(.:format)      categories#update
-#                  PUT    /categories/:id(.:format)      categories#update
-#                  DELETE /categories/:id(.:format)      categories#destroy
-#         api_urls GET    /api/urls(.:format)            api/urls#index {:format=>"json"}
-#                  POST   /api/urls(.:format)            api/urls#create {:format=>"json"}
-#      new_api_url GET    /api/urls/new(.:format)        api/urls#new {:format=>"json"}
-#     edit_api_url GET    /api/urls/:id/edit(.:format)   api/urls#edit {:format=>"json"}
-#          api_url GET    /api/urls/:id(.:format)        api/urls#show {:format=>"json"}
-#                  PATCH  /api/urls/:id(.:format)        api/urls#update {:format=>"json"}
-#                  PUT    /api/urls/:id(.:format)        api/urls#update {:format=>"json"}
-#                  DELETE /api/urls/:id(.:format)        api/urls#destroy {:format=>"json"}
-
+#        Prefix Verb   URI Pattern                    Controller#Action
+#        signup GET    /signup(.:format)              users#new
+#          root GET    /                              static_pages#home
+#          help GET    /help(.:format)                static_pages#help
+#         about GET    /about(.:format)               static_pages#about
+#       contact GET    /contact(.:format)             static_pages#contact
+#         login GET    /login(.:format)               sessions#new
+#               POST   /login(.:format)               sessions#create
+#        logout GET    /logout(.:format)              sessions#destroy
+#          urls GET    /urls(.:format)                urls#index
+#               POST   /urls(.:format)                urls#create
+#       new_url GET    /urls/new(.:format)            urls#new
+#      edit_url GET    /urls/:id/edit(.:format)       urls#edit
+#           url GET    /urls/:id(.:format)            urls#show
+#               PATCH  /urls/:id(.:format)            urls#update
+#               PUT    /urls/:id(.:format)            urls#update
+#         pages GET    /pages(.:format)               pages#index
+#               POST   /pages(.:format)               pages#create
+#      new_page GET    /pages/new(.:format)           pages#new
+#     edit_page GET    /pages/:id/edit(.:format)      pages#edit
+#          page GET    /pages/:id(.:format)           pages#show
+#               PATCH  /pages/:id(.:format)           pages#update
+#               PUT    /pages/:id(.:format)           pages#update
+#               DELETE /pages/:id(.:format)           pages#destroy
+#         users GET    /users(.:format)               users#index
+#               POST   /users(.:format)               users#create
+#      new_user GET    /users/new(.:format)           users#new
+#     edit_user GET    /users/:id/edit(.:format)      users#edit
+#          user GET    /users/:id(.:format)           users#show
+#               PATCH  /users/:id(.:format)           users#update
+#               PUT    /users/:id(.:format)           users#update
+#               DELETE /users/:id(.:format)           users#destroy
+#    categories GET    /categories(.:format)          categories#index
+#               POST   /categories(.:format)          categories#create
+#  new_category GET    /categories/new(.:format)      categories#new
+# edit_category GET    /categories/:id/edit(.:format) categories#edit
+#      category GET    /categories/:id(.:format)      categories#show
+#               PATCH  /categories/:id(.:format)      categories#update
+#               PUT    /categories/:id(.:format)      categories#update
+#               DELETE /categories/:id(.:format)      categories#destroy
+#          slug GET    /urls/:slug(.:format)          urls#show
+#      api_urls GET    /api/urls(.:format)            api/urls#index {:format=>"json"}
+#               POST   /api/urls(.:format)            api/urls#create {:format=>"json"}
+#   new_api_url GET    /api/urls/new(.:format)        api/urls#new {:format=>"json"}
+#  edit_api_url GET    /api/urls/:id/edit(.:format)   api/urls#edit {:format=>"json"}
+#       api_url GET    /api/urls/:id(.:format)        api/urls#show {:format=>"json"}
+#               PATCH  /api/urls/:id(.:format)        api/urls#update {:format=>"json"}
+#               PUT    /api/urls/:id(.:format)        api/urls#update {:format=>"json"}
+#               DELETE /api/urls/:id(.:format)        api/urls#destroy {:format=>"json"}
 
 
 
