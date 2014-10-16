@@ -40,16 +40,18 @@ class ApplicationController < ActionController::Base
     mechanize = Mechanize.new
     page = mechanize.get('http://www.bing.com/images/searchbyimage?FORM=IRSBIQ&cbir=sbi&imgurl=' + url)
     if page./('div.sbi_sp')
-      search_img = page./('div.sbi_sp').first./('a').first.attr('href')
-      page = page./('div.info').first./('a').first.attr('href')
-      page = mechanize.get(page)
-      page./('img').each do |i|
-        if i.attr('src')
-          if i.attr('src').include?(search_img[/.*(?=\..+$)/])
-            if i.attr('title')
-              @image_title = i.attr('title')
-            else
-              @image_title = i.attr('alt')
+      if page./('div.sbi_sp').first
+        search_img = page./('div.sbi_sp').first./('a').first.attr('href')
+        page = page./('div.info').first./('a').first.attr('href')
+        page = mechanize.get(page)
+        page./('img').each do |i|
+          if i.attr('src')
+            if i.attr('src').include?(search_img[/.*(?=\..+$)/])
+              if i.attr('title')
+                @image_title = i.attr('title')
+              else
+                @image_title = i.attr('alt')
+              end
             end
           end
         end
