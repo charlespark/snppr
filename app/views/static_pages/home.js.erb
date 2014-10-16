@@ -1,1 +1,1 @@
-$('form').prepend('<p>Your url: <%= link_to( "http://snppr.ly/#{@url.slug}", slug_path(@url.slug)) %></p>'); 
+$('form').prepend('<p>Your url: <%= link_to( "http://snppr.ly/#{@url.slug}", slug_path(@url.slug), method: 'get') %></p>'); 

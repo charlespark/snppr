@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   def scrape_data(url)
     mechanize = Mechanize.new
     page = mechanize.get(url)
-    if page.filename
+    
+    if page.response["content-type"].include? "image"
       return nil
     end
     
@@ -27,7 +28,7 @@ class ApplicationController < ActionController::Base
   def scrape_title(url)
     mechanize = Mechanize.new
     page = mechanize.get(url)
-    if page.filename
+    if page.response["content-type"].include? "image"
       return nil
     end
     page.title 
