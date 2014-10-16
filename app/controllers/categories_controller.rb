@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
 # before_action :set_category, only: [:show, :edit, :update, :destroy]
 
+#Setting the necessary methods for the Categories function in SNPPR.
+
 	def index
 	end
 

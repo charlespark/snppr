@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       # Handle a successful save.
       log_in(@user)
       current_user
-      flash[:success] = "Welcome to the SNPPR!"
+      flash[:success] = "Welcome to SNPPR!"
       redirect_to @user
     else
       render 'new'
